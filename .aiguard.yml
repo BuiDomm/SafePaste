@@ -1,0 +1,33 @@
+version: 1
+mode: interactive
+profiles:
+  - recommended
+  - developer
+  - vi-VN
+actions:
+  credential: block
+  secret: ask
+  financial: ask
+  pii: warn
+  sensitive_file: ask
+exclude:
+  paths:
+    - "**/.git/**"
+    - "**/node_modules/**"
+    - "**/dist/**"
+    - "**/target/**"
+    - "README.md"
+    - "crates/core/src/validators.rs"
+    - "packages/core-wasm/generated/**"
+    - "packages/rules-base/rules.json"
+    - "packages/rules-vi/rules.json"
+    - "packages/sdk/test/**"
+    - "packages/cli/test/**"
+    - "test/fixtures/**"
+    - "apps/desktop/assets/**"
+    - "apps/desktop/src-tauri/icons/**"
+requiredDetectors:
+  - deterministic
+suppressions: []
+customRules: []
+maxFileBytes: 1048576

@@ -1,0 +1,11 @@
+node_modules/
+target/
+dist/
+generated/
+*.tsbuildinfo
+.DS_Store
+.aiguard-state/
+benchmark-results/
+apps/desktop/src-tauri/gen/
+apps/desktop/src-tauri/icons/android/
+apps/desktop/src-tauri/icons/ios/

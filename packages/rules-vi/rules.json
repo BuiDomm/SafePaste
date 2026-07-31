@@ -1,0 +1,76 @@
+{
+  "manifest": {
+    "apiVersion": 1,
+    "id": "aiguard.vi-VN",
+    "version": "0.1.0",
+    "minEngineVersion": "0.1.0-alpha.0",
+    "license": "Apache-2.0",
+    "locales": ["vi-VN"]
+  },
+  "rules": [
+    {
+      "id": "pii.vn_phone",
+      "pattern": "(?:\\+84|0)(?:3|5|7|8|9)[0-9]{8}\\b",
+      "category": "pii",
+      "severity": "medium",
+      "confidence": "high",
+      "action": "warn",
+      "explanation": "Chuỗi có định dạng số điện thoại di động Việt Nam.",
+      "remediation": "Thay bằng số giả hoặc che phần lớn chữ số trước khi gửi tới AI.",
+      "fixtures": {
+        "positive": ["Liên hệ 0912345678", "SĐT +84912345678"],
+        "negative": ["091234567", "+84123456789", "2026073120"]
+      }
+    },
+    {
+      "id": "pii.vn_cccd",
+      "pattern": "\\b[0-9]{12}\\b",
+      "category": "pii",
+      "severity": "high",
+      "confidence": "high",
+      "action": "ask",
+      "validator": "vn_cccd",
+      "context": ["cccd", "căn cước", "can cuoc", "số định danh", "so dinh danh"],
+      "requiresContext": true,
+      "explanation": "Dãy số có cấu trúc và ngữ cảnh của căn cước công dân Việt Nam.",
+      "remediation": "Che số căn cước hoặc thay bằng dữ liệu giả trước khi gửi.",
+      "fixtures": {
+        "positive": ["CCCD: 079000000000", "Số căn cước 001099000000"],
+        "negative": ["mã đơn hàng 079000000000", "CCCD: 999000000000"]
+      }
+    },
+    {
+      "id": "pii.vn_cmnd",
+      "pattern": "\\b[0-9]{9}\\b",
+      "category": "pii",
+      "severity": "high",
+      "confidence": "medium",
+      "action": "ask",
+      "context": ["cmnd", "chứng minh nhân dân", "chung minh nhan dan"],
+      "requiresContext": true,
+      "explanation": "Dãy số xuất hiện trong ngữ cảnh chứng minh nhân dân Việt Nam.",
+      "remediation": "Che số CMND hoặc dùng dữ liệu tổng hợp.",
+      "fixtures": {
+        "positive": ["CMND 123456789", "chứng minh nhân dân: 012345678"],
+        "negative": ["order 123456789", "CMND example"]
+      }
+    },
+    {
+      "id": "financial.vn_tax_id",
+      "pattern": "\\b[0-9]{10}(?:-[0-9]{3})?\\b",
+      "category": "financial",
+      "severity": "high",
+      "confidence": "high",
+      "action": "ask",
+      "validator": "vn_tax_id",
+      "context": ["mst", "mã số thuế", "ma so thue", "tax code", "tax id"],
+      "requiresContext": true,
+      "explanation": "Dãy số vượt qua kiểm tra mã số thuế Việt Nam và có ngữ cảnh phù hợp.",
+      "remediation": "Xác nhận nhu cầu hoặc che mã số thuế trước khi gửi.",
+      "fixtures": {
+        "positive": ["MST: 0312345673", "mã số thuế 0312345673-001"],
+        "negative": ["MST: 0312345674", "order 0312345673"]
+      }
+    }
+  ]
+}

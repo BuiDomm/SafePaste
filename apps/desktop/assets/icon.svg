@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="AI Data Boundary shield">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#12221e"/>
+      <stop offset="1" stop-color="#07100d"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8df0c7"/>
+      <stop offset="1" stop-color="#38b98b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="220" fill="url(#bg)"/>
+  <path d="M512 158c104 76 210 108 316 114v210c0 190-115 310-316 386C311 792 196 672 196 482V272c106-6 212-38 316-114Z" fill="url(#shield)"/>
+  <path d="M512 258c74 50 146 74 216 84v142c0 126-70 214-216 276V258Z" fill="#0b1714" opacity=".9"/>
+  <path d="M356 506h312" stroke="#0b1714" stroke-width="54" stroke-linecap="round"/>
+  <circle cx="512" cy="506" r="78" fill="#e9fff7" stroke="#0b1714" stroke-width="42"/>
+</svg>

@@ -1,0 +1,31 @@
+name: Publish alpha
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  verify-only-until-name-is-reserved:
+    runs-on: ubuntu-latest
+    environment: npm-staging
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: false
+      - uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: taiki-e/install-action@6a1bd70eaac3c8bdf093356838d7ee09fda951cf
+        with:
+          tool: wasm-pack
+      - run: npm ci
+      - run: npm test
+      - run: npm pack --workspaces --dry-run
+      - name: Publishing intentionally disabled
+        run: node -e "console.log('Reserve the final scope, set repository URLs, remove private flags, then enable staged trusted publishing.')"

@@ -1,0 +1,17 @@
+[package]
+name = "aiguard-desktop"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Desktop preview for AI Data Boundary"
+
+[build-dependencies]
+tauri-build = { version = "2.6.3", features = [] }
+
+[dependencies]
+aiguard-core = { path = "../../../crates/core" }
+rand = "0.9"
+serde.workspace = true
+serde_json.workspace = true
+tauri = { version = "2.11.5", features = [] }

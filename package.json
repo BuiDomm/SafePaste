@@ -1,0 +1,37 @@
+{
+  "name": "aiguard-workspace",
+  "version": "0.1.0-alpha.0",
+  "private": true,
+  "description": "Local-first data boundary for AI applications and agents",
+  "license": "Apache-2.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=22 <25"
+  },
+  "packageManager": "npm@11.16.0",
+  "scripts": {
+    "build": "npm run build:wasm && npm run build:ts",
+    "build:desktop": "npm --workspace @aiguard/desktop run build",
+    "build:wasm": "wasm-pack build crates/core --target nodejs --out-dir ../../packages/core-wasm/generated --out-name aiguard_core --release && node scripts/prepare-wasm.mjs",
+    "build:ts": "tsc -b packages/rules-base packages/rules-vi packages/core-wasm packages/sdk packages/cli",
+    "clean": "node scripts/clean.mjs",
+    "test": "npm run test:rust && npm run build && npm run test:node && npm run test:rules",
+    "test:rust": "cargo test -p aiguard-core",
+    "test:node": "node --test packages/sdk/test/*.test.mjs packages/cli/test/*.test.mjs",
+    "test:rules": "node packages/cli/dist/index.js rules test --format json",
+    "check": "cargo fmt --all -- --check && cargo clippy -p aiguard-core --all-targets -- -D warnings && tsc -b --pretty false",
+    "check:desktop": "npm run build:desktop && cargo check -p aiguard-desktop",
+    "audit": "npm audit --audit-level=high && cargo audit",
+    "bench": "npm run build && node scripts/benchmark.mjs",
+    "desktop:dev": "npm --workspace @aiguard/desktop run tauri dev",
+    "desktop:build": "npm --workspace @aiguard/desktop run tauri build"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "typescript": "6.0.3"
+  }
+}

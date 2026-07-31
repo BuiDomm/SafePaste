@@ -1,0 +1,23 @@
+{
+  "name": "@aiguard/cli",
+  "version": "0.1.0-alpha.0",
+  "private": true,
+  "description": "Local-first AI data boundary command-line tool",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "aiguard": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@aiguard/core-wasm": "0.1.0-alpha.0",
+    "@aiguard/rules-base": "0.1.0-alpha.0",
+    "@aiguard/rules-vi": "0.1.0-alpha.0",
+    "@aiguard/sdk": "0.1.0-alpha.0"
+  }
+}

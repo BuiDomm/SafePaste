@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aiguard.invalid/schemas/rule-pack.schema.json",
+  "title": "AI Data Boundary declarative rule pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["manifest", "rules"],
+  "properties": {
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["apiVersion", "id", "version", "minEngineVersion", "license", "locales"],
+      "properties": {
+        "apiVersion": { "const": 1 },
+        "id": { "type": "string", "pattern": "^[a-zA-Z0-9._-]+$" },
+        "version": { "type": "string", "minLength": 1 },
+        "minEngineVersion": { "type": "string", "minLength": 1 },
+        "license": { "type": "string", "minLength": 1 },
+        "locales": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+      }
+    },
+    "rules": { "type": "array", "items": { "$ref": "#/$defs/rule" } }
+  },
+  "$defs": {
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "pattern", "category", "severity", "confidence", "action", "explanation", "remediation"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-zA-Z0-9._-]+$" },
+        "kind": { "enum": ["text", "path"] },
+        "pattern": { "type": "string", "minLength": 1 },
+        "category": { "type": "string", "minLength": 1 },
+        "severity": { "enum": ["low", "medium", "high", "critical"] },
+        "confidence": { "enum": ["low", "medium", "high"] },
+        "action": { "enum": ["allow", "warn", "ask", "redact", "block"] },
+        "explanation": { "type": "string", "minLength": 1 },
+        "remediation": { "type": "string", "minLength": 1 },
+        "validator": { "enum": ["none", "luhn", "iban", "ipv4", "vn_cccd", "vn_tax_id", "entropy"] },
+        "context": { "type": "array", "items": { "type": "string" } },
+        "negativeContext": { "type": "array", "items": { "type": "string" } },
+        "requiresContext": { "type": "boolean" },
+        "minEntropy": { "type": "number", "minimum": 0, "maximum": 8 },
+        "fixtures": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "positive": { "type": "array", "items": { "type": "string" } },
+            "negative": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    }
+  }
+}

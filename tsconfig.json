@@ -1,0 +1,10 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./packages/rules-base" },
+    { "path": "./packages/rules-vi" },
+    { "path": "./packages/core-wasm" },
+    { "path": "./packages/sdk" },
+    { "path": "./packages/cli" }
+  ]
+}

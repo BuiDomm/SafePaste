@@ -1,0 +1,21 @@
+{
+  "name": "@aiguard/rules-base",
+  "version": "0.1.0-alpha.0",
+  "private": true,
+  "description": "Declarative base rule pack for AI Data Boundary",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./rules.json": "./rules.json"
+  },
+  "files": ["dist", "rules.json"],
+  "scripts": {
+    "build": "tsc -b"
+  }
+}
