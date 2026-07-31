@@ -11,7 +11,7 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 hex = "0.4"
-hmac = "0.12"
+hmac = "0.13"
 regex = "1.11"
 semver = "1"
 serde.workspace = true
