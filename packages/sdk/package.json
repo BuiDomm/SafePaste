@@ -21,6 +21,6 @@
     "@aiguard/core-wasm": "0.1.0-alpha.0",
     "@aiguard/rules-base": "0.1.0-alpha.0",
     "@aiguard/rules-vi": "0.1.0-alpha.0",
-    "yaml": "2.9.0"
+    "yaml": "2.9.1"
   }
 }
