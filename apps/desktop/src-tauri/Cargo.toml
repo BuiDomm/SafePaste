@@ -11,7 +11,7 @@ tauri-build = { version = "2.6.3", features = [] }
 
 [dependencies]
 aiguard-core = { path = "../../../crates/core" }
-rand = "0.9"
+rand = "0.10"
 serde.workspace = true
 serde_json.workspace = true
 tauri = { version = "2.11.5", features = [] }
